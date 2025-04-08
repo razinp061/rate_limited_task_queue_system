@@ -2,7 +2,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Cron } from '@nestjs/schedule';
 import { Model, UpdateQuery } from 'mongoose';
-import { Task, TaskStatus } from 'src/task/entities/task.entity';
+import { Task, TaskStatus } from './../../../src/task/entities/task.entity';
+
 
 @Injectable()
 export class CronjobService {
