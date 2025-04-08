@@ -25,9 +25,14 @@ export class TaskController {
     return this.taskService.findAll();
   }
 
+  @Get('status')
+  groupByStatus() {
+    return this.taskService.groupByStatus();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.taskService.findOne(+id);
+    return this.taskService.findOne(id)
   }
 
   @Patch(':id')
