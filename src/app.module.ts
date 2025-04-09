@@ -4,6 +4,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TaskModule } from './task/task.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { CronjobModule } from './middlewares/cronjob/cronjob.module';
+import * as crypto from 'crypto';
+
 
 @Module({
   imports: [

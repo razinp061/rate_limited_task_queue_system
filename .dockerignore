@@ -1,0 +1,22 @@
+# Node modules (installed inside container)
+node_modules
+
+# Logs
+*.log
+logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Dependency lock files (optional, include if you don't want deterministic builds)
+# package-lock.json
+# yarn.lock
+
+# Build output
+dist
+
+# OS / Editor / Misc
+.DS_Store
+.vscode
+.idea
+*.swp

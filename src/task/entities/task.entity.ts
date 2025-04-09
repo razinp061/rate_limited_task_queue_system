@@ -1,11 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { TaskStatus } from 'src/contants/constants';
 
-export enum TaskStatus {
-  PENDING = 'pending',
-  PROCESSING = 'processing',
-  COMPLETED = 'completed',
-  FAILED = 'failed',
-}
 @Schema({ timestamps: true })
 export class Task {
   @Prop({ enum: ['send-email', 'process-file'] }) type: string;
@@ -16,6 +11,10 @@ export class Task {
   status: TaskStatus;
   @Prop({ default: 0, min: 0, max: 0 }) attempts: number;
   @Prop() errorMessage: string;
+  @Prop({ enum: [1, 2, 3, 4], default: 1 }) priority: number;
+  @Prop({ type: Date, required: false })
+  scheduleAt?: Date;
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);
+

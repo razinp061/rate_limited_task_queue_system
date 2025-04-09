@@ -2,35 +2,41 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Cron } from '@nestjs/schedule';
 import { Model, UpdateQuery } from 'mongoose';
-import { Task, TaskStatus } from './../../../src/task/entities/task.entity';
-
-
+import { Task } from 'src/task/entities/task.entity';
+import { TaskStatus } from 'src/contants/constants';
 @Injectable()
 export class CronjobService {
   private readonly logger = new Logger(CronjobService.name);
   constructor(@InjectModel(Task.name) private taskMdl: Model<Task>) {}
   @Cron('0 * * * * *')
   async handleCron() {
+    const now = new Date();
     const limit = 5;
     const pendingTasks = await this.taskMdl
-      .find({ status: TaskStatus.PENDING })
-      .limit(limit);
+      .find({
+        status: TaskStatus.PENDING,
+        $or: [
+          { scheduleAt: { $lte: now } },
+          { scheduleAt: { $exists: false } },
+          { scheduleAt: null },
+        ],
+      })
+      .limit(limit)
+      .sort({ priority: -1 });
 
     for (const task of pendingTasks) {
       const lockedTask = await this.taskMdl.findOneAndUpdate(
         { _id: task._id, status: TaskStatus.PENDING },
         { $set: { status: TaskStatus.PROCESSING, updatedAt: new Date() } },
-        { new: true },
+        { sort: { priority: -1, createdAt: 1 }, new: true },
       );
-      console.log(lockedTask)
 
-      if (!lockedTask) continue; 
+      if (!lockedTask) continue;
 
       try {
         await new Promise((res) => setTimeout(res, 2000));
 
         if (Math.random() < 0.3) {
-          console.log(Math.random());
           throw new Error('Simulated task failure');
         }
 
