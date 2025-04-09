@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { TaskStatus } from 'src/contants/constants';
+import { TaskStatus } from 'src/constants/constants';
 
 @Schema({ timestamps: true })
 export class Task {

@@ -1,6 +1,6 @@
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { TaskStatus } from 'src/contants/constants';
-import { PriorityLabel } from 'src/contants/constants';
+import { TaskStatus } from 'src/constants/constants';
+import { PriorityLabel } from 'src/constants/constants';
 
 export class CreateTaskDto {
   @IsString()

@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TaskService } from './task.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { Task } from './entities/task.entity';
-import { PriorityLabel, TaskStatus } from 'src/contants/constants';
+import { PriorityLabel, TaskStatus } from 'src/constants/constants';
 import { Model } from 'mongoose';
 
 const mockTask = {

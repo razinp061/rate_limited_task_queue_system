@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { PriorityValue, TaskStatus } from 'src/contants/constants';
+import { PriorityValue, TaskStatus } from 'src/constants/constants';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
 import { Task } from './entities/task.entity';

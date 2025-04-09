@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Cron } from '@nestjs/schedule';
 import { Model, UpdateQuery } from 'mongoose';
 import { Task } from 'src/task/entities/task.entity';
-import { TaskStatus } from 'src/contants/constants';
+import { TaskStatus } from 'src/constants/constants';
 @Injectable()
 export class CronjobService {
   private readonly logger = new Logger(CronjobService.name);
