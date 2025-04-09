@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { PriorityValue, TaskStatus } from 'src/constants/constants';
@@ -85,6 +85,10 @@ export class TaskService {
   async findOne(id: string) {
     try {
       const data = await this.taskMdl.findById(id);
+
+      if (!data) {
+        throw new NotFoundException('Task not found')
+      }
       return {
         message: 'Retrieved task detail',
         data,
@@ -108,6 +112,9 @@ export class TaskService {
         updateTaskDto,
         { new: true },
       );
+      if (!updatedTask) {
+        throw new NotFoundException('Task not found')
+      }
       return { message: 'Task updated successfully', data: updatedTask}
     } catch (error) {
       const { status, message } = error as {
