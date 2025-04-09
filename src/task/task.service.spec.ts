@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TaskService } from './task.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { Task } from './entities/task.entity';
-import { TaskStatus } from 'src/contants/constants';
+import { PriorityLabel, TaskStatus } from 'src/contants/constants';
 import { Model } from 'mongoose';
 
 const mockTask = {
@@ -10,6 +10,7 @@ const mockTask = {
   title: 'Test Task',
   status: TaskStatus.PENDING,
   attempts: 0,
+  priority: PriorityLabel.LOW,
   save: jest.fn(),
 };
 
@@ -44,7 +45,7 @@ describe('TaskService', () => {
   });
 
   it('should create a task', async () => {
-    const newTask = await service.create({ type: 'send-email' });
+    const newTask = await service.create({ type: 'send-email', priority: PriorityLabel.LOW });
   });
 
   it('should retry a failed task if attempts < maxAttempts', async () => {

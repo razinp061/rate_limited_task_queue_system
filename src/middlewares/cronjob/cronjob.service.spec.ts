@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CronjobService } from './cronjob.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { Task } from '../../task/entities/task.entity';
+import { Task } from 'src/task/entities/task.entity';
 import { Model } from 'mongoose';
 import { TaskStatus } from '../../contants/constants';
 
